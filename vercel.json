@@ -1,0 +1,36 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "cleanUrls": false,
+  "trailingSlash": false,
+  "rewrites": [
+    { "source": "/", "destination": "/index.html" },
+    { "source": "/blog", "destination": "/blog/index.html" },
+    { "source": "/blog/", "destination": "/blog/index.html" }
+  ],
+  "headers": [
+    {
+      "source": "/css/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=86400" }]
+    },
+    {
+      "source": "/js/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=86400" }]
+    },
+    {
+      "source": "/.well-known/ai-catalog.json",
+      "headers": [{ "key": "Content-Type", "value": "application/json; charset=utf-8" }]
+    },
+    {
+      "source": "/.well-known/ard.json",
+      "headers": [{ "key": "Content-Type", "value": "application/json; charset=utf-8" }]
+    },
+    {
+      "source": "/.well-known/agents.json",
+      "headers": [{ "key": "Content-Type", "value": "application/json; charset=utf-8" }]
+    },
+    {
+      "source": "/llms.txt",
+      "headers": [{ "key": "Content-Type", "value": "text/plain; charset=utf-8" }]
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+# thegoodplace
+
+> thegoodplace.com 是居家裝飾印刷海報選物店：無酸美術紙、A4／A3／A2 尺寸，繁體中文介面。一張對的海報，能讓客廳與臥室立刻有焦點。
+
+Agents：先讀本檔，再依需求開啟 Markdown 頁面或 OKF 知識包。公開知識允許擷取；購物車頁不索引。
+
+Canonical site: https://thegoodplace.com/
+
+## Discovery standards
+
+- OKF bundle: https://thegoodplace.com/okf/index.md
+  (Google Cloud Open Knowledge Format — https://cloud.google.com/blog/products/data-analytics/how-the-open-knowledge-format-can-improve-data-sharing)
+- ARD AI Catalog: https://thegoodplace.com/.well-known/ai-catalog.json
+  (Google Agentic Resource Discovery — https://developers.googleblog.com/announcing-the-agentic-resource-discovery-specification/)
+- ARD manifest: https://thegoodplace.com/.well-known/ard.json
+- Preferred Sources (readers): https://www.google.com/preferences/source?q=https://thegoodplace.com/
+  (Google original / quality content — https://blog.google/products-and-platforms/products/search/original-high-quality-content-search/)
+- Preferred Sources deeplink pattern example: https://www.google.com/preferences/source?q=https://www.prudential.com.hk/
+- Sitemap: https://thegoodplace.com/sitemap.xml
+
+## Pages
+
+- [首頁](https://thegoodplace.com/index.html.md): 品牌定位與本季精選海報
+- [全部海報](https://thegoodplace.com/shop.html.md): 商品目錄、風格分類與價格
+- [商品詳情](https://thegoodplace.com/product.html.md): 尺寸、材質與加購說明
+- [關於我們](https://thegoodplace.com/about.html.md): 品牌故事與聯絡方式
+- [部落格](https://thegoodplace.com/blog/index.html.md): 原創掛畫與尺寸選購指南
+
+## Blog (original content)
+
+- [如何掛上海報又不傷牆](https://thegoodplace.com/blog/how-to-hang-poster.html.md)
+- [A4／A3／A2 怎麼選](https://thegoodplace.com/blog/choose-poster-size.html.md)
+
+## Knowledge (OKF hierarchy)
+
+- [OKF index](https://thegoodplace.com/okf/index.md)
+- [Brand identity](https://thegoodplace.com/okf/brand/identity.md)
+- [Product catalog](https://thegoodplace.com/okf/products/catalog.md)
+- [Sizes](https://thegoodplace.com/okf/products/sizes.md)
+- [Shipping](https://thegoodplace.com/okf/policies/shipping.md)
+- [FAQ](https://thegoodplace.com/okf/content/faq.md)
+- [Blog concepts](https://thegoodplace.com/okf/content/blog.md)
+
+## Optional
+
+- [設計系統](https://thegoodplace.com/design.md)
+- [Agent capabilities](https://thegoodplace.com/.well-known/agents.json)

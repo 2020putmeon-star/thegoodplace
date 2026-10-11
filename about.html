@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#1e3d33" />
+  <title>關於我們 — thegoodplace</title>
+  <meta name="description" content="認識 thegoodplace.com：專注居家裝飾印刷海報的選物品牌。" />
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@400;600;700&family=Syne:wght@600;700;800&display=swap" />
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要內容</a>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="logo" href="/">thegood<span>place</span></a>
+      <button class="menu-toggle" aria-label="開啟選單" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="site-nav">
+        <li><a href="/">首頁</a></li>
+        <li><a href="/shop.html">全部海報</a></li>
+        <li><a href="/blog/index.html">部落格</a></li>
+        <li><a class="active" href="/about.html" aria-current="page">關於我們</a></li>
+        <li>
+          <a class="nav-cart" href="/cart.html">
+            購物車 <span class="cart-count" data-cart-count>0</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="main" class="container">
+    <div class="page-intro">
+      <span class="eyebrow">About</span>
+      <h1>關於 thegoodplace</h1>
+      <p class="answer-first">
+        thegoodplace.com 是居家裝飾印刷海報選物店；我們用無酸美術紙呈現安靜色調的牆面作品，聯絡信箱是 hello@thegoodplace.com。
+      </p>
+    </div>
+
+    <div class="about-grid">
+      <div class="about-copy">
+        <p>
+          thegoodplace.com 專注居家裝飾印刷海報。每一件作品都經過色調與紙質挑選，
+          希望掛上牆後，空間會變得更安靜、更清楚、也更有生活感。
+        </p>
+        <h2>我們在意的三件事</h2>
+        <p><strong>紙質</strong> — 使用無酸美術紙，細節清楚、色彩溫潤。</p>
+        <p><strong>尺寸</strong> — 提供 A4／A3／A2，方便搭配不同牆面與相框。</p>
+        <p><strong>節奏</strong> — 不做過度裝飾；讓畫面成為空間裡剛剛好的焦點。</p>
+
+        <h2>聯絡我們</h2>
+        <p>Email：hello@thegoodplace.com　｜　服務時間：週一至週五 10:00–18:00</p>
+
+        <form class="contact-form" id="contact-form">
+          <input type="text" name="name" placeholder="你的名字" required />
+          <input type="email" name="email" placeholder="Email" required />
+          <textarea name="message" placeholder="想問什麼？例如尺寸、出貨或客製建議" required></textarea>
+          <button class="btn btn-primary" type="submit">送出訊息</button>
+          <p class="form-msg" id="form-msg">已收到你的訊息，我們會盡快回覆。</p>
+        </form>
+      </div>
+
+      <div class="about-visual">
+        <img
+          src="https://images.unsplash.com/photo-1615874959474-d609969a20ed?auto=format&fit=crop&w=1200&q=80"
+          alt="明亮居家空間與牆上海報"
+          width="1200"
+          height="1500"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="footer-statement">牆面值得被好好對待。</p>
+      <div class="footer-grid">
+        <div class="footer-brand">thegoodplace.com</div>
+        <div class="footer-links">
+          <a href="/">首頁</a>
+          <a href="/shop.html">全部海報</a>
+          <a href="/cart.html">購物車</a>
+        </div>
+      </div>
+      <p class="footer-copy">© 2026 thegoodplace.com — 居家海報選物店</p>
+    </div>
+  </footer>
+
+  <script>
+    window.TGP_SEO = {
+      path: "about.html",
+      canonical: "https://thegoodplace.com/about.html",
+      markdown: "https://thegoodplace.com/about.html.md",
+      title: "關於我們 — thegoodplace",
+      description: "認識 thegoodplace.com：居家裝飾印刷海報選物品牌。",
+      schema: {
+        "@context": "https://schema.org",
+        "@type": "AboutPage",
+        name: "關於 thegoodplace",
+        url: "https://thegoodplace.com/about.html"
+      }
+    };
+  </script>
+  <script src="/js/seo.js"></script>
+  <script src="/js/main.js"></script>
+  <script>
+    document.getElementById("contact-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      document.getElementById("form-msg").classList.add("show");
+      e.target.reset();
+      TGP.showToast("訊息已送出");
+    });
+  </script>
+</body>
+</html>

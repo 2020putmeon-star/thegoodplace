@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#1e3d33" />
+  <title>全部海報 — thegoodplace</title>
+  <meta name="description" content="瀏覽 thegoodplace 全部居家裝飾印刷海報。" />
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@400;600;700&family=Syne:wght@600;700;800&display=swap" />
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要內容</a>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="logo" href="/">thegood<span>place</span></a>
+      <button class="menu-toggle" aria-label="開啟選單" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="site-nav">
+        <li><a href="/">首頁</a></li>
+        <li><a class="active" href="/shop.html" aria-current="page">全部海報</a></li>
+        <li><a href="/blog/index.html">部落格</a></li>
+        <li><a href="/about.html">關於我們</a></li>
+        <li>
+          <a class="nav-cart" href="/cart.html">
+            購物車 <span class="cart-count" data-cart-count>0</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="main" class="container">
+    <div class="page-intro">
+      <span class="eyebrow">Shop</span>
+      <h1>全部海報</h1>
+      <p class="answer-first">
+        這裡是 thegoodplace 全部居家印刷海報目錄：可依風景／植物／抽象／靜物／城市篩選，價格約 NT$650–780，點進商品可選 A4／A3／A2。
+      </p>
+    </div>
+
+    <div class="toolbar">
+      <button class="chip active" type="button" data-filter="全部">全部</button>
+      <button class="chip" type="button" data-filter="風景">風景</button>
+      <button class="chip" type="button" data-filter="植物">植物</button>
+      <button class="chip" type="button" data-filter="抽象">抽象</button>
+      <button class="chip" type="button" data-filter="靜物">靜物</button>
+      <button class="chip" type="button" data-filter="城市">城市</button>
+      <select class="filter-select" id="sort-select" aria-label="排序">
+        <option value="default">預設排序</option>
+        <option value="price-asc">價格：低到高</option>
+        <option value="price-desc">價格：高到低</option>
+        <option value="name">名稱</option>
+      </select>
+    </div>
+
+    <div class="product-grid" id="shop-grid" style="padding-bottom: 5rem;"></div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="footer-statement">牆面值得被好好對待。</p>
+      <div class="footer-grid">
+        <div class="footer-brand">thegoodplace.com</div>
+        <div class="footer-links">
+          <a href="/">首頁</a>
+          <a href="/cart.html">購物車</a>
+          <a href="/about.html">關於我們</a>
+        </div>
+      </div>
+      <p class="footer-copy">© 2026 thegoodplace.com — 居家海報選物店</p>
+    </div>
+  </footer>
+
+  <script>
+    window.TGP_SEO = {
+      path: "shop.html",
+      canonical: "https://thegoodplace.com/shop.html",
+      markdown: "https://thegoodplace.com/shop.html.md",
+      title: "全部海報 — thegoodplace",
+      description: "瀏覽 thegoodplace 全部居家裝飾印刷海報，可篩選風格與排序。",
+      schema: {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        name: "全部海報",
+        url: "https://thegoodplace.com/shop.html",
+        isPartOf: { "@id": "https://thegoodplace.com/#website" }
+      }
+    };
+  </script>
+  <script src="/js/seo.js"></script>
+  <script src="/js/main.js"></script>
+  <script>
+    let currentFilter = "全部";
+    let currentSort = "default";
+
+    function renderShop() {
+      let list = [...TGP.PRODUCTS];
+      if (currentFilter !== "全部") {
+        list = list.filter((p) => p.tag === currentFilter);
+      }
+      if (currentSort === "price-asc") list.sort((a, b) => a.price - b.price);
+      if (currentSort === "price-desc") list.sort((a, b) => b.price - a.price);
+      if (currentSort === "name") list.sort((a, b) => a.name.localeCompare(b.name, "zh-Hant"));
+
+      const grid = document.getElementById("shop-grid");
+      grid.innerHTML = list.length
+        ? list.map(TGP.productCardHTML).join("")
+        : `<div class="empty-cart"><h2>此分類暫無商品</h2><p>試試其他風格分類。</p></div>`;
+    }
+
+    document.querySelectorAll(".chip").forEach((chip) => {
+      chip.addEventListener("click", () => {
+        document.querySelectorAll(".chip").forEach((c) => c.classList.remove("active"));
+        chip.classList.add("active");
+        currentFilter = chip.dataset.filter;
+        renderShop();
+      });
+    });
+
+    document.getElementById("sort-select").addEventListener("change", (e) => {
+      currentSort = e.target.value;
+      renderShop();
+    });
+
+    renderShop();
+
+    // ItemList schema for catalog discovery
+    const itemList = {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      itemListElement: TGP.PRODUCTS.map((p, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        url: `https://thegoodplace.com/product.html?id=${p.id}`,
+        name: p.name
+      }))
+    };
+    const s = document.createElement("script");
+    s.type = "application/ld+json";
+    s.textContent = JSON.stringify(itemList);
+    document.head.appendChild(s);
+  </script>
+</body>
+</html>

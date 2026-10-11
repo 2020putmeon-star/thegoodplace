@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#1e3d33" />
+  <title>商品詳情 — thegoodplace</title>
+  <meta name="description" content="查看海報詳情、尺寸與價格，加入 thegoodplace 購物車。" />
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@400;600;700&family=Syne:wght@600;700;800&display=swap" />
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要內容</a>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="logo" href="/">thegood<span>place</span></a>
+      <button class="menu-toggle" aria-label="開啟選單" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="site-nav">
+        <li><a href="/">首頁</a></li>
+        <li><a class="active" href="/shop.html">全部海報</a></li>
+        <li><a href="/blog/index.html">部落格</a></li>
+        <li><a href="/about.html">關於我們</a></li>
+        <li>
+          <a class="nav-cart" href="/cart.html">
+            購物車 <span class="cart-count" data-cart-count>0</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="main" class="container">
+    <div class="page-intro" style="padding-bottom: 0;">
+      <a href="/shop.html" style="color: var(--color-teal); font-weight: 600; font-size: 0.92rem;">← 返回全部海報</a>
+    </div>
+
+    <p class="answer-first" id="product-answer" style="margin-top: 1rem;"></p>
+    <div class="detail" id="product-detail">
+      <!-- filled by JS -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="footer-statement">牆面值得被好好對待。</p>
+      <div class="footer-grid">
+        <div class="footer-brand">thegoodplace.com</div>
+        <div class="footer-links">
+          <a href="/shop.html">繼續選購</a>
+          <a href="/cart.html">查看購物車</a>
+          <a href="/about.html">關於我們</a>
+        </div>
+      </div>
+      <p class="footer-copy">© 2026 thegoodplace.com — 居家海報選物店</p>
+    </div>
+  </footer>
+
+  <script src="/js/main.js"></script>
+  <script>
+    const params = new URLSearchParams(location.search);
+    const id = params.get("id") || "p01";
+    const product = TGP.getProductById(id) || TGP.PRODUCTS[0];
+    let selectedSize = "A3";
+    let qty = 1;
+
+    document.title = `${product.name} — thegoodplace`;
+    window.TGP_SEO = {
+      path: "product.html",
+      canonical: `https://thegoodplace.com/product.html?id=${product.id}`,
+      markdown: "https://thegoodplace.com/product.html.md",
+      title: `${product.name} — thegoodplace`,
+      description: product.desc,
+      type: "product",
+      image: product.image,
+      schema: {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        name: product.name,
+        description: product.desc,
+        image: product.image,
+        sku: product.id,
+        category: product.tag,
+        brand: { "@type": "Brand", name: "thegoodplace" },
+        offers: {
+          "@type": "Offer",
+          priceCurrency: "TWD",
+          price: product.price,
+          availability: "https://schema.org/InStock",
+          url: `https://thegoodplace.com/product.html?id=${product.id}`
+        }
+      }
+    };
+  </script>
+  <script src="/js/seo.js"></script>
+  <script>
+    document.getElementById("product-answer").textContent =
+      `${product.name} 是 thegoodplace 的${product.tag}海報，售價 ${TGP.formatPrice(product.price)}，可選 A4／A3／A2，無酸美術紙印刷、不含相框。`;
+
+    document.getElementById("product-detail").innerHTML = `
+      <div class="detail-gallery">
+        <div class="detail-main">
+          <img src="${product.image}" alt="${product.name}" width="960" height="1200" fetchpriority="high" decoding="async" />
+        </div>
+      </div>
+      <div class="detail-info">
+        <span class="eyebrow">${product.tag}</span>
+        <h1>${product.name}</h1>
+        <p class="detail-price">${TGP.formatPrice(product.price)}</p>
+        <p class="detail-desc">${product.desc}</p>
+
+        <div class="option-group">
+          <label>尺寸</label>
+          <div class="option-row" id="size-options">
+            <button type="button" class="size-btn active" data-size="A4">A4</button>
+            <button type="button" class="size-btn" data-size="A3">A3</button>
+            <button type="button" class="size-btn" data-size="A2">A2</button>
+          </div>
+        </div>
+
+        <div class="option-group">
+          <label>數量</label>
+          <div class="qty-row">
+            <button type="button" id="qty-minus" aria-label="減少">−</button>
+            <input id="qty-input" type="number" min="1" value="1" readonly />
+            <button type="button" id="qty-plus" aria-label="增加">+</button>
+          </div>
+        </div>
+
+        <div class="detail-actions">
+          <button class="btn btn-primary" type="button" id="add-cart">加入購物車</button>
+          <a class="btn btn-ghost" href="/cart.html">前往結帳</a>
+        </div>
+
+        <ul class="detail-note">
+          <li>無酸美術紙印刷，色彩穩定不易褪色</li>
+          <li>不含相框；可另搭配簡約木框</li>
+          <li>台灣本島訂單滿 NT$1,500 免運</li>
+        </ul>
+      </div>
+    `;
+
+    // default A3 active properly
+    document.querySelectorAll(".size-btn").forEach((btn) => {
+      btn.classList.toggle("active", btn.dataset.size === "A3");
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".size-btn").forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        selectedSize = btn.dataset.size;
+      });
+    });
+    selectedSize = "A3";
+
+    document.getElementById("qty-minus").addEventListener("click", () => {
+      qty = Math.max(1, qty - 1);
+      document.getElementById("qty-input").value = qty;
+    });
+    document.getElementById("qty-plus").addEventListener("click", () => {
+      qty += 1;
+      document.getElementById("qty-input").value = qty;
+    });
+    document.getElementById("add-cart").addEventListener("click", () => {
+      TGP.addToCart(product.id, selectedSize, qty);
+    });
+  </script>
+</body>
+</html>

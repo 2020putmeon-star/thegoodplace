@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#1e3d33" />
+  <title>購物車 — thegoodplace</title>
+  <meta name="description" content="檢視 thegoodplace 購物車並完成結帳。" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@400;600;700&family=Syne:wght@600;700;800&display=swap" />
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要內容</a>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="logo" href="/">thegood<span>place</span></a>
+      <button class="menu-toggle" aria-label="開啟選單" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="site-nav">
+        <li><a href="/">首頁</a></li>
+        <li><a href="/shop.html">全部海報</a></li>
+        <li><a href="/blog/index.html">部落格</a></li>
+        <li><a href="/about.html">關於我們</a></li>
+        <li>
+          <a class="nav-cart active" href="/cart.html" aria-current="page">
+            購物車 <span class="cart-count" data-cart-count>0</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="main" class="container">
+    <div class="page-intro">
+      <span class="eyebrow">Cart</span>
+      <h1>購物車</h1>
+      <p class="answer-first">
+        在此確認海報尺寸與數量後送出訂單；台灣本島滿 NT$1,500 免運，未滿運費 NT$80。
+      </p>
+    </div>
+
+    <div id="cart-root"></div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="footer-statement">牆面值得被好好對待。</p>
+      <div class="footer-grid">
+        <div class="footer-brand">thegoodplace.com</div>
+        <div class="footer-links">
+          <a href="/shop.html">繼續逛逛</a>
+          <a href="/about.html">聯絡我們</a>
+        </div>
+      </div>
+      <p class="footer-copy">© 2026 thegoodplace.com — 居家海報選物店</p>
+    </div>
+  </footer>
+
+  <script>
+    window.TGP_SEO = {
+      path: "cart.html",
+      canonical: "https://thegoodplace.com/cart.html",
+      markdown: "https://thegoodplace.com/cart.html",
+      title: "購物車 — thegoodplace",
+      description: "確認 thegoodplace 購物車並送出訂單。",
+      robots: "noindex,nofollow"
+    };
+  </script>
+  <script src="/js/seo.js"></script>
+  <script src="/js/main.js"></script>
+  <script>
+    function renderCart() {
+      const cart = TGP.getCart();
+      const root = document.getElementById("cart-root");
+
+      if (!cart.length) {
+        root.innerHTML = `
+          <div class="empty-cart" style="margin-bottom: 5rem;">
+            <h2>購物車還是空的</h2>
+            <p>去挑一張讓空間變好的海報吧。</p>
+            <a class="btn btn-primary" href="/shop.html">前往全部海報</a>
+          </div>
+        `;
+        return;
+      }
+
+      const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
+      const shipping = subtotal >= 1500 ? 0 : 80;
+      const total = subtotal + shipping;
+
+      root.innerHTML = `
+        <div class="cart-layout">
+          <div class="cart-list">
+            ${cart
+              .map(
+                (item) => `
+              <article class="cart-item" data-id="${item.id}" data-size="${item.size}">
+                <img src="${item.image}" alt="${item.name}" />
+                <div>
+                  <h3>${item.name}</h3>
+                  <p class="meta">尺寸 ${item.size} · ${TGP.formatPrice(item.price)}</p>
+                  <div class="qty-row" style="margin-top: 0.65rem;">
+                    <button type="button" class="qty-btn" data-act="minus">−</button>
+                    <input type="number" value="${item.qty}" readonly />
+                    <button type="button" class="qty-btn" data-act="plus">+</button>
+                  </div>
+                  <button type="button" class="remove">移除</button>
+                </div>
+                <div class="line-total price">${TGP.formatPrice(item.price * item.qty)}</div>
+              </article>
+            `
+              )
+              .join("")}
+          </div>
+          <aside class="cart-summary">
+            <h2>訂單摘要</h2>
+            <div class="summary-row"><span>小計</span><span>${TGP.formatPrice(subtotal)}</span></div>
+            <div class="summary-row"><span>運費</span><span>${shipping === 0 ? "免運" : TGP.formatPrice(shipping)}</span></div>
+            <div class="summary-row total"><span>合計</span><span>${TGP.formatPrice(total)}</span></div>
+            <button class="btn btn-primary btn-block" type="button" id="checkout-btn" style="margin-top: 1.25rem;">送出訂單</button>
+            <p style="font-size: 0.85rem; color: var(--ink-soft); margin-top: 0.85rem;">滿 NT$1,500 免運。送出後我們會以 email 確認。</p>
+          </aside>
+        </div>
+      `;
+
+      root.querySelectorAll(".cart-item").forEach((row) => {
+        const id = row.dataset.id;
+        const size = row.dataset.size;
+        const item = cart.find((i) => i.id === id && i.size === size);
+
+        row.querySelector('[data-act="minus"]').addEventListener("click", () => {
+          TGP.setQty(id, size, item.qty - 1);
+          renderCart();
+        });
+        row.querySelector('[data-act="plus"]').addEventListener("click", () => {
+          TGP.setQty(id, size, item.qty + 1);
+          renderCart();
+        });
+        row.querySelector(".remove").addEventListener("click", () => {
+          TGP.removeFromCart(id, size);
+          renderCart();
+          TGP.showToast("已移除商品");
+        });
+      });
+
+      document.getElementById("checkout-btn").addEventListener("click", () => {
+        TGP.saveCart([]);
+        TGP.showToast("訂單已送出，謝謝你！");
+        renderCart();
+      });
+    }
+
+    renderCart();
+  </script>
+</body>
+</html>
