@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#1e3d33" />
+  <title>thegoodplace — 居家海報選物店</title>
+  <meta name="description" content="thegoodplace.com 是居家裝飾印刷海報選物店：無酸美術紙、A4／A3／A2，讓牆面立刻有焦點。" />
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要內容</a>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a class="logo" href="index.html">thegood<span>place</span></a>
+      <button class="menu-toggle" aria-label="開啟選單" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="site-nav">
+        <li><a class="active" href="index.html" aria-current="page">首頁</a></li>
+        <li><a href="shop.html">全部海報</a></li>
+        <li><a href="blog/">部落格</a></li>
+        <li><a href="about.html">關於我們</a></li>
+        <li>
+          <a class="nav-cart" href="cart.html">
+            購物車 <span class="cart-count" data-cart-count>0</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="hero-media">
+        <img
+          src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1800&q=80"
+          alt="明亮客廳牆面上的大幅印刷海報"
+          width="1800"
+          height="1200"
+          fetchpriority="high"
+          decoding="async"
+        />
+      </div>
+      <div class="hero-content">
+        <p class="hero-caption">Look 01 · 客廳牆面</p>
+        <p class="hero-brand">thegood<span class="accent">place</span></p>
+        <h1>一張海報，客廳就不一樣</h1>
+        <p class="answer-first" style="border-left-color: var(--color-mint); color: rgba(255,255,255,.92);">
+          thegoodplace.com 販售無酸美術紙印刷的居家海報；可選 A4／A3／A2，台灣本島滿 NT$1,500 免運。
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-light" href="shop.html">看本季海報</a>
+          <a class="btn btn-ghost on-dark" href="promo/brand-sting.html">品牌短片</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">本季精選</span>
+            <h2>先從這些牆面開始</h2>
+          </div>
+          <p>風景、植物與抽象構圖，適合客廳、臥室與工作角落。點進商品可選 A4／A3／A2。</p>
+        </div>
+        <div class="product-grid" id="featured-grid"></div>
+        <div style="margin-top: 2.25rem; text-align: center;">
+          <a class="btn btn-primary" href="shop.html">查看全部商品</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="lookbook defer-block" aria-label="牆面 lookbook">
+      <div class="lookbook-head">
+        <span class="eyebrow">Lookbook</span>
+        <h2 style="font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2rem);">掛上牆的樣子</h2>
+      </div>
+      <div class="lookbook-track" id="lookbook-track" aria-hidden="true"></div>
+    </section>
+
+    <section class="story defer-block">
+      <div class="story-copy">
+        <span class="eyebrow" style="color: var(--color-mint);">為什麼是 thegoodplace</span>
+        <h2>不是堆裝飾，是給牆一個節奏</h2>
+        <p>好空間不必複雜。選對一張海報，回家的感覺會更安靜、更清楚、剛剛好。</p>
+        <a class="btn btn-light" href="shop.html">開始選購</a>
+      </div>
+      <div class="story-media">
+        <img
+          src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=1400&q=80"
+          alt="溫暖居家角落與掛畫"
+          width="1400"
+          height="1050"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="footer-statement">牆面值得被好好對待。</p>
+      <div class="footer-grid">
+        <div class="footer-brand">thegoodplace.com</div>
+        <div class="footer-links">
+          <a href="shop.html">全部海報</a>
+          <a href="blog/">部落格</a>
+          <a href="about.html">關於我們</a>
+          <a href="llms.txt">llms.txt</a>
+          <a href="okf/index.md">OKF</a>
+          <a href=".well-known/ai-catalog.json">ARD</a>
+          <a href="https://www.google.com/preferences/source?q=https://thegoodplace.com/" rel="noopener noreferrer" target="_blank">偏好來源</a>
+        </div>
+      </div>
+      <p class="footer-copy">© 2026 thegoodplace.com — 居家海報選物店</p>
+    </div>
+  </footer>
+
+  <script>
+    window.TGP_SEO = {
+      path: "index.html",
+      canonical: "https://thegoodplace.com/",
+      markdown: "https://thegoodplace.com/index.html.md",
+      title: "thegoodplace — 居家海報選物店",
+      description: "thegoodplace.com 是居家裝飾印刷海報選物店：無酸美術紙、A4／A3／A2。",
+      schema: {
+        "@context": "https://schema.org",
+        "@type": "Store",
+        name: "thegoodplace",
+        url: "https://thegoodplace.com/",
+        description: "居家裝飾印刷海報選物店",
+        currenciesAccepted: "TWD",
+        paymentAccepted: "Credit Card",
+        areaServed: "TW"
+      },
+      ardEntry: {
+        identifier: "urn:air:thegoodplace.com:site:home",
+        displayName: "thegoodplace home",
+        type: "text/html",
+        url: "https://thegoodplace.com/",
+        description: "Home of thegoodplace printed poster shop.",
+        representativeQueries: ["thegoodplace 賣什麼", "居家海報哪裡買"]
+      }
+    };
+  </script>
+  <script src="js/seo.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.getElementById("featured-grid").innerHTML = TGP.PRODUCTS
+      .slice(0, 3)
+      .map(TGP.productCardHTML)
+      .join("");
+
+    const lookbook = document.getElementById("lookbook-track");
+    const frames = TGP.PRODUCTS.map((p) =>
+      `<img src="${p.image}" alt="" width="640" height="800" loading="lazy" decoding="async" />`
+    ).join("");
+    lookbook.innerHTML = frames + frames;
+  </script>
+</body>
+</html>
